@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 50%;
+        }
+
+        #tools{
+            display: flex;
+            width: 41.5%;
+            margin: auto;
+            justify-content: space-around;
+        }
+
+        #idApp {
+            padding: 10px;
+            background: #d6d6d6;
+            border: none;
+            border: none;
+        }
+    </style>
+</head>
+<div id="tools">
+    <input type="text" id="idobj" placeholder="ID de l'objet" />
+    <select id="idapp">
+        <option value="escampette">esCAmpette</option>
+        <option value="baladesliegeoises">Balades Liegeoises</option>
+        <option value="marando">MaRando</option>
+        <option value="valdemarne">Val De Marne</option>
+        <option value="tarntourisme">Tarn Tourisme</option>
+        <option value="randosmb">Rando SMB</option>
+        <option value="randomoselle">Rando Moselle</option>
+        <option value="savoie_mont_blanc">Velo SMB</option>
+        <option value="vichy">Vichy</option>
+        <option value="wallobike">Wallobike</option>
+    </select>
+    <input type="button" id="qrgen" value="Générer QRCODE" />
+</div>
+
+<div id="qrcode"></div>
+<script>
+    (function () {
+        const btnGen = document.querySelector("#qrgen");
+        const idObjet = document.querySelector("#idobj");
+        const idApp = document.querySelector("#idapp");
+        const imgDiv = document.querySelector("#qrcode");
+
+        btnGen.addEventListener("click", () => {
+            const appID = idApp.options[idApp.selectedIndex].value;
+            const objID = idObjet.value;
+            var url = `https://ul.cirkwi.com/com.cirkwi.${appID}/c/${objID}`;
+
+            imgDiv.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=250x250" alt="" title="" /><br/><span>${appID} - ${objID}</span>`
+        });
+    })();
+</script>
+
+</html>
