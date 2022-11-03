@@ -23,9 +23,14 @@
             border: none;
             border: none;
         }
+        
+        #btnSelec {
+            min-width: 70px;
+            display: flex;
+            justify-content: center;
+        }
 
         .onoff {
-            margin-left: -27px;
             display: -moz-inline-stack;
             display: inline-block;
             vertical-align: middle;
@@ -67,7 +72,7 @@
             display: block;
             position: absolute;
             top: 0px;
-            left: 0px;
+            left: -5px;
             width: 100%;
             font-size: 12px;
             color: #591717;
@@ -102,6 +107,7 @@
 
         .onoff input:checked+label:after {
             content: 'QA';
+            margin-left: 5px;
             color: #091707;
         }
 
@@ -130,7 +136,7 @@
         <option value="vichy">Vichy</option>
         <option value="wallobike">Wallobike</option>
     </select>
-    <div>
+    <div id="btnSelec">
         <p class="onoff"><input type="checkbox" value="1" id="url-qa"><label for="url-qa"></label></p>
     </div>
     <input type="button" id="qrgen" value="Générer QRCODE" />
