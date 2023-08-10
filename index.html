@@ -121,6 +121,7 @@
     <select id="idapp">
         <option value="baladesliegeoises">Balades Liegeoises</option>
         <option value="baladnature">Balad Nature</option>
+        <option value="belfort">Belfort Bien-être</option>
         <option value="centrissime">Centrissime</option>
         <option value="pit">Cirkwi</option>
         <option value="escampette">esCAmpette</option>
@@ -159,7 +160,7 @@
 
             var url = `https://ul${urlQa}.cirkwi.com/com.cirkwi.${appID}/c/${objID}`;
 
-            imgDiv.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=250x250" alt="" title="" /><br/><span>${appID} - ${objID}</span>`
+            imgDiv.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=250x250" alt="" title="" /><br/><span>${appID} - ${objID}</span><br/><a href="${url}>${url}</a>"`
         });
     })();
 </script>
