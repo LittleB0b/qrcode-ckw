@@ -23,7 +23,7 @@
             border: none;
             border: none;
         }
-        
+
         #btnSelec {
             min-width: 70px;
             display: flex;
@@ -114,6 +114,91 @@
         .onoff input:checked+label:before {
             left: 37px;
         }
+
+        .pc {
+            display: -moz-inline-stack;
+            display: inline-block;
+            vertical-align: middle;
+            *vertical-align: auto;
+            zoom: 1;
+            *display: inline;
+            position: relative;
+            cursor: pointer;
+            width: 55px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .pc label {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background: #2218b4;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #FFF;
+            -webkit-transition: background 0.3s, text-indent 0.3s;
+            -moz-transition: background 0.3s, text-indent 0.3s;
+            -o-transition: background 0.3s, text-indent 0.3s;
+            transition: background 0.3s, text-indent 0.3s;
+            text-indent: 27px;
+            -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+            -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+        }
+
+        .pc label:after {
+            content: 'Circuit';
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: -5px;
+            width: 100%;
+            font-size: 12px;
+            color: #f8f8f8;
+            text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.35);
+            z-index: 1;
+        }
+
+        .pc label:before {
+            content: '';
+            width: 15px;
+            height: 24px;
+            border-radius: 3px;
+            background: #FFF;
+            position: absolute;
+            z-index: 2;
+            top: 3px;
+            left: 3px;
+            display: block;
+            -webkit-transition: left 0.3s;
+            -moz-transition: left 0.3s;
+            -o-transition: left 0.3s;
+            transition: left 0.3s;
+            -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+            -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .pc input:checked+label {
+            background: #d4bd39;
+            text-indent: 8px;
+        }
+
+        .pc input:checked+label:after {
+            content: 'POI';
+            margin-left: 5px;
+            color: #091707;
+        }
+
+        .pc input:checked+label:before {
+            left: 37px;
+        }
     </style>
 </head>
 <div id="tools">
@@ -126,6 +211,7 @@
         <option value="centrissime">Centrissime</option>
         <option value="pit">Cirkwi</option>
         <option value="escampette">esCAmpette</option>
+        <option value="fouesnantais">Balade en Pays Fouesnantais</option>
         <option value="iledefranceimpressionniste">Ile de France</option>
         <option value="marando">MaRando</option>
         <option value="randomoselle">Rando Moselle</option>
@@ -142,6 +228,9 @@
     <div id="btnSelec">
         <p class="onoff"><input type="checkbox" value="1" id="url-qa"><label for="url-qa"></label></p>
     </div>
+    <div id="btnSelec">
+        <p class="pc"><input type="checkbox" value="1" id="poi-circuit"><label for="poi-circuit"></label></p>
+    </div>
     <input type="button" id="qrgen" value="Générer QRCODE" />
 </div>
 
@@ -153,13 +242,15 @@
         const idApp = document.querySelector("#idapp");
         const imgDiv = document.querySelector("#qrcode");
         const qa = document.querySelector("#url-qa");
+        const pc = document.querySelector("#poi-circuit");
 
         btnGen.addEventListener("click", () => {
             const appID = idApp.options[idApp.selectedIndex].value;
             const objID = idObjet.value;
             const urlQa = qa.checked ? "-qa" : "";
+            const isPc = pc.checked ? "p" : "c";
 
-            var url = `https://ul${urlQa}.cirkwi.com/com.cirkwi.${appID}/c/${objID}`;
+            var url = `https://ul${urlQa}.cirkwi.com/com.cirkwi.${appID}/${isPc}/${objID}`;
 
             imgDiv.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=250x250" alt="" title="" /><br/><span>${appID} - ${objID}</span><br/><a href="${url}">${url}</a>`
         });
